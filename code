@@ -1,0 +1,37 @@
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+
+#function that takes and return dataframes
+def data_frames():
+    df_1 = pd.read_csv('C:\\Users\\Hp\\OneDrive\\Desktop\\Assin2\\world_bank.csv', skiprows=3)
+    df_2 = pd.read_csv('C:\\Users\\Hp\\OneDrive\\Desktop\\Assin2\\world_bank.csv', skiprows=3)
+    df_2 = df_2.transpose()
+    df_2.columns = df_2.iloc[0]
+    return df_1, df_2.iloc[2:]
+
+dataframe_1, dataframe_2 = data_frames()
+#print(dataframe_1)
+#print(dataframe_2)
+
+#overall statistics
+overall = dataframe_1.describe()
+plt.plot(overall)
+plt.title("Overall Summery")
+plt.show()
+
+#calculate and display mean values from 1960 to 2020
+mean_val = dataframe_1.iloc[:,3:-2].mean()
+plt.hist(mean_val)
+plt.title("Mean Values")
+plt.show()
+
+#minimum population in 1960
+print(dataframe_1['1960'].min())
+
+#maximum population in 1960
+print(dataframe_1['1960'].max())
+
+#pie plot
+dataframe_1['Country Name'].value_counts().plot(kind='pie', figsize=(6,6))
